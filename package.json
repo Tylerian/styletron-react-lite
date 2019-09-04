@@ -1,0 +1,40 @@
+{
+  "name": "styletron-react-lite",
+  "version": "1.0.0",
+  "description": "A lightweight styletron binding for React.",
+  "main": "out/styletron-react-lite.cjs.js",
+  "module": "out/styletron-react-lite.esm.js",
+  "browser": "out/styletron-react-lite.umd.js",
+  "files": [
+    "out",
+    "LICENSE",
+    "README.md"
+  ],
+  "repository": "https://github.com/Tylerian/styletron-react-lite.git",
+  "author": "Jairo Tylera <Tylerian>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "rollup -c",
+    "watch": "rollup -c -w"
+  },
+  "dependencies": {
+    "styletron-engine-atomic": "^1.4.0",
+    "styletron-standard": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.4",
+    "@types/react": "^16.9.2",
+    "@types/styletron-engine-atomic": "^1.1.0",
+    "@types/styletron-standard": "^2.0.0",
+    "rollup": "^1.20.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-typescript": "^1.0.1",
+    "tslib": "^1.10.0",
+    "typescript": "^3.6.2"
+  },
+  "peerDependencies": {
+    "react": ">=16.x.x"
+  }
+}
