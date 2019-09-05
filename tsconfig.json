@@ -7,10 +7,13 @@
         "declaration": true,
 
         /* Output directory for generated declaration files. */
-        "declarationDir": "out",
+        "declarationDir": "out/types",
 
         /* Show diagnostic information. */
         "diagnostics": true,
+
+        /* Only emit ‘.d.ts’ declaration files. */
+        "emitDeclarationOnly": true,
 
         /* Import non-ES modules as default imports. */
         "esModuleInterop": true,
@@ -32,9 +35,6 @@
 
         /* Determine how modules get resolved. */
         "moduleResolution": "node",
-
-        /* Do not emit outputs. */
-        "noEmit": true,
 
         /* Do not emit outputs if any errors were reported. */
         "noEmitOnError": true,
