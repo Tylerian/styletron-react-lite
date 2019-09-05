@@ -12,4 +12,6 @@ const withStyletron = (Component: any) => (props: any) => {
     );
 }
 
-export { withStyletron };
+export {
+    withStyletron
+};

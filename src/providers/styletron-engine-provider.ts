@@ -1,7 +1,11 @@
-import { StandardEngine } from "styletron-standard";
+import {
+    StandardEngine
+} from "styletron-standard";
 
 interface IStyletronEngineProvider {
     get(): StandardEngine;
 }
 
-export { IStyletronEngineProvider };
+export {
+    IStyletronEngineProvider
+};

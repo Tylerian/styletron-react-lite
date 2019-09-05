@@ -1,5 +1,9 @@
-import { StyletronContext } from "./styletron-context";
+import {
+    StyletronContext
+} from "./styletron-context";
 
 const StyletronProvider = StyletronContext.Provider;
 
-export { StyletronProvider };
+export {
+    StyletronProvider
+};

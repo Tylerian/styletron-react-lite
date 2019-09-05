@@ -1,7 +1,16 @@
-import { StandardEngine } from "styletron-standard";
-import { Client, Server, hydrateType } from "styletron-engine-atomic";
+import {
+    StandardEngine
+} from "styletron-standard";
 
-import { IStyletronEngineProvider } from "./styletron-engine-provider";
+import {
+    Client,
+    Server,
+    hydrateType
+} from "styletron-engine-atomic";
+
+import {
+    IStyletronEngineProvider
+} from "./styletron-engine-provider";
 
 type StyletronAtomicEngineProviderOptions = {
     styleTagQuerySelector: string;
@@ -33,4 +42,6 @@ class StyletronAtomicEngineProvider implements IStyletronEngineProvider {
     }
 }
 
-export { StyletronAtomicEngineProvider };
+export {
+    StyletronAtomicEngineProvider
+};
