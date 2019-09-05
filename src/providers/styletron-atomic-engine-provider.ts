@@ -1,10 +1,6 @@
 import {
-    StandardEngine
-} from "styletron-standard";
-
-import {
-    Client,
-    Server,
+    Client as AtomicEngineClient,
+    Server as AtomicEngineServer,
     hydrateType
 } from "styletron-engine-atomic";
 
@@ -21,14 +17,24 @@ const defaultOptions: StyletronAtomicEngineProviderOptions = {
 };
 
 class StyletronAtomicEngineProvider implements IStyletronEngineProvider {
-    get(): StandardEngine {
+    get() /* infer */ {
         if (typeof window === "undefined") {
-            return new Server();
+            return new AtomicEngineServer();
         } else {
-            return new Client({
+            return new AtomicEngineClient({
                 hydrate: this.getHydratableElements()
             });
         }
+    }
+
+    getClient(): AtomicEngineClient {
+        return new AtomicEngineClient({
+            hydrate: this.getHydratableElements()
+        });
+    }
+
+    getServer(): AtomicEngineServer {
+        return new AtomicEngineServer();
     }
 
     getHydratableElements: () => hydrateType = () => {
@@ -43,5 +49,6 @@ class StyletronAtomicEngineProvider implements IStyletronEngineProvider {
 }
 
 export {
-    StyletronAtomicEngineProvider
+    StyletronAtomicEngineProvider,
+    StyletronAtomicEngineProviderOptions
 };

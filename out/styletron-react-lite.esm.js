@@ -41,6 +41,11 @@ var StyletronAtomicEngineProvider = /** @class */ (function () {
     return StyletronAtomicEngineProvider;
 }());
 
+var provider = new StyletronAtomicEngineProvider();
+function getStyletronAtomic() {
+    return provider.get();
+}
+
 function useStyletron() {
     return useContext(StyletronContext);
 }
@@ -81,4 +86,4 @@ var withStyletron = function (Component) { return function (props) {
     return (React.createElement(Component, __assign({}, props, { styletron: styletron })));
 }; };
 
-export { StyletronAtomicEngineProvider, StyletronConsumer, StyletronContext, StyletronProvider, useStyletron, useStyletronDriver, withStyletron };
+export { StyletronAtomicEngineProvider, StyletronConsumer, StyletronContext, StyletronProvider, getStyletronAtomic, useStyletron, useStyletronDriver, withStyletron };

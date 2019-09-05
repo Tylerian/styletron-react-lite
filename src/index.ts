@@ -15,8 +15,16 @@ import {
 } from "./providers/styletron-atomic-engine-provider";
 
 import {
-    getStyletronAtomic
-} from "./utilities/get-styletron-atomic";
+    getAtomicProvider
+} from "./utilities/get-atomic-provider";
+
+import {
+    getStyletronClient
+} from "./utilities/get-styletron-client";
+
+import {
+    getStyletronServer
+} from "./utilities/get-styletron-server";
 
 import {
     useStyletron
@@ -37,7 +45,9 @@ export {
     StyletronProvider,
     
     /* utilities */
-    getStyletronAtomic,
+    getAtomicProvider,
+    getStyletronClient,
+    getStyletronServer,
     useStyletron,
     useStyletronDriver,
     withStyletron,
