@@ -1,6 +1,6 @@
 {
   "name": "styletron-react-lite",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "A lightweight styletron binding for React.",
   "main": "out/styletron-react-lite.cjs.js",
   "module": "out/styletron-react-lite.esm.js",
