@@ -15,8 +15,9 @@ var StyletronConsumer = StyletronContext.Consumer;
 
 var StyletronProvider = StyletronContext.Provider;
 
+var DEFAULT_STYLETRON_HYDRATE_QUERY_SELECTOR = "_styletron_hydrate_";
 var defaultOptions = {
-    styleTagQuerySelector: "_styletron_hydrate_"
+    styleTagQuerySelector: DEFAULT_STYLETRON_HYDRATE_QUERY_SELECTOR
 };
 var StyletronAtomicEngineProvider = /** @class */ (function () {
     function StyletronAtomicEngineProvider(options) {
@@ -38,12 +39,35 @@ var StyletronAtomicEngineProvider = /** @class */ (function () {
             });
         }
     };
+    StyletronAtomicEngineProvider.prototype.getClient = function () {
+        return new Client({
+            hydrate: this.getHydratableElements()
+        });
+    };
+    StyletronAtomicEngineProvider.prototype.getServer = function () {
+        return new Server();
+    };
     return StyletronAtomicEngineProvider;
 }());
 
-var provider = new StyletronAtomicEngineProvider();
-function getStyletronAtomic() {
-    return provider.get();
+function getAtomicProvider(options) {
+    return new StyletronAtomicEngineProvider(options);
+}
+
+var provider = getAtomicProvider();
+/**
+ * Return a new instance of a styletron client with preset defaults.
+ */
+function getStyletronClient() {
+    return provider.getClient();
+}
+
+var provider$1 = getAtomicProvider();
+/**
+ * Return a new instance of a styletron server with preset defaults.
+ */
+function getStyletronServer() {
+    return provider$1.getServer();
 }
 
 function useStyletron() {
@@ -86,4 +110,4 @@ var withStyletron = function (Component) { return function (props) {
     return (React.createElement(Component, __assign({}, props, { styletron: styletron })));
 }; };
 
-export { StyletronAtomicEngineProvider, StyletronConsumer, StyletronContext, StyletronProvider, getStyletronAtomic, useStyletron, useStyletronDriver, withStyletron };
+export { DEFAULT_STYLETRON_HYDRATE_QUERY_SELECTOR, StyletronAtomicEngineProvider, StyletronConsumer, StyletronContext, StyletronProvider, getAtomicProvider, getStyletronClient, getStyletronServer, useStyletron, useStyletronDriver, withStyletron };

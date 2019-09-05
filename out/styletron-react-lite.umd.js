@@ -19,8 +19,9 @@
 
     var StyletronProvider = StyletronContext.Provider;
 
+    var DEFAULT_STYLETRON_HYDRATE_QUERY_SELECTOR = "_styletron_hydrate_";
     var defaultOptions = {
-        styleTagQuerySelector: "_styletron_hydrate_"
+        styleTagQuerySelector: DEFAULT_STYLETRON_HYDRATE_QUERY_SELECTOR
     };
     var StyletronAtomicEngineProvider = /** @class */ (function () {
         function StyletronAtomicEngineProvider(options) {
@@ -42,12 +43,35 @@
                 });
             }
         };
+        StyletronAtomicEngineProvider.prototype.getClient = function () {
+            return new styletronEngineAtomic.Client({
+                hydrate: this.getHydratableElements()
+            });
+        };
+        StyletronAtomicEngineProvider.prototype.getServer = function () {
+            return new styletronEngineAtomic.Server();
+        };
         return StyletronAtomicEngineProvider;
     }());
 
-    var provider = new StyletronAtomicEngineProvider();
-    function getStyletronAtomic() {
-        return provider.get();
+    function getAtomicProvider(options) {
+        return new StyletronAtomicEngineProvider(options);
+    }
+
+    var provider = getAtomicProvider();
+    /**
+     * Return a new instance of a styletron client with preset defaults.
+     */
+    function getStyletronClient() {
+        return provider.getClient();
+    }
+
+    var provider$1 = getAtomicProvider();
+    /**
+     * Return a new instance of a styletron server with preset defaults.
+     */
+    function getStyletronServer() {
+        return provider$1.getServer();
     }
 
     function useStyletron() {
@@ -90,11 +114,14 @@
         return (React__default.createElement(Component, __assign({}, props, { styletron: styletron })));
     }; };
 
+    exports.DEFAULT_STYLETRON_HYDRATE_QUERY_SELECTOR = DEFAULT_STYLETRON_HYDRATE_QUERY_SELECTOR;
     exports.StyletronAtomicEngineProvider = StyletronAtomicEngineProvider;
     exports.StyletronConsumer = StyletronConsumer;
     exports.StyletronContext = StyletronContext;
     exports.StyletronProvider = StyletronProvider;
-    exports.getStyletronAtomic = getStyletronAtomic;
+    exports.getAtomicProvider = getAtomicProvider;
+    exports.getStyletronClient = getStyletronClient;
+    exports.getStyletronServer = getStyletronServer;
     exports.useStyletron = useStyletron;
     exports.useStyletronDriver = useStyletronDriver;
     exports.withStyletron = withStyletron;

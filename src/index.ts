@@ -11,20 +11,18 @@ import {
 } from "./context/styletron-provider";
 
 import {
-    StyletronAtomicEngineProvider
+    StyletronAtomicEngineProvider,
+    DEFAULT_STYLETRON_HYDRATE_QUERY_SELECTOR
 } from "./providers/styletron-atomic-engine-provider";
 
 import {
     getAtomicProvider
-} from "./utilities/get-atomic-provider";
+} from "./utilities/get-provider";
 
 import {
-    getStyletronClient
-} from "./utilities/get-styletron-client";
-
-import {
+    getStyletronClient,
     getStyletronServer
-} from "./utilities/get-styletron-server";
+} from "./utilities/get-styletron";
 
 import {
     useStyletron
@@ -53,5 +51,8 @@ export {
     withStyletron,
 
     /* providers */
-    StyletronAtomicEngineProvider
+    StyletronAtomicEngineProvider,
+
+    /* constants */
+    DEFAULT_STYLETRON_HYDRATE_QUERY_SELECTOR
 };
