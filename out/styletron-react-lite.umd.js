@@ -65,13 +65,11 @@
     function getStyletronClient() {
         return provider.getClient();
     }
-
-    var provider$1 = getAtomicProvider();
     /**
      * Return a new instance of a styletron server with preset defaults.
      */
     function getStyletronServer() {
-        return provider$1.getServer();
+        return provider.getServer();
     }
 
     function useStyletron() {
