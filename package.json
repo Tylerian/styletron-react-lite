@@ -24,17 +24,20 @@
     "@types/styletron-engine-atomic": "^1.1.0",
     "@types/styletron-standard": "^2.0.0",
     "styletron-engine-atomic": "^1.4.1",
-    "styletron-standard": "^3.0.1"
+    "styletron-standard": "^3.0.1",
+    "ts-invariant": "^0.4.4"
   },
   "devDependencies": {
-    "@types/node": "^12.7.4",
-    "@types/react": "^16.9.2",
-    "rollup": "^1.20.3",
+    "@types/node": "^12.11.1",
+    "@types/react": "^16.9.9",
+    "rollup": "^1.24.0",
     "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-invariant": "^0.5.6",
     "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-replace": "^2.2.0",
     "rollup-plugin-typescript": "^1.0.1",
     "tslib": "^1.10.0",
-    "typescript": "^3.6.2"
+    "typescript": "^3.6.4"
   },
   "peerDependencies": {
     "react": ">=16.6.0"

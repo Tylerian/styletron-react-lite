@@ -1,23 +1,134 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('styletron-engine-atomic'), require('styletron-standard')) :
     typeof define === 'function' && define.amd ? define(['exports', 'react', 'styletron-engine-atomic', 'styletron-standard'], factory) :
-    (global = global || self, factory(global.StyletronReactLite = {}, global.React, global.styletronEngineAtomic, global.styletronStandard));
+    (global = global || self, factory(global.StyletronReactLite = {}, global.React, global.StyletronEngineAtomic, global.StyletronStandard));
 }(this, function (exports, React, styletronEngineAtomic, styletronStandard) { 'use strict';
 
     var React__default = 'default' in React ? React['default'] : React;
 
-    var throwNoEngineAvailableException = function () {
-        throw new Error("A Styletron styled component was rendered, but no Styletron engine instance was provided in React context.");
+    /*! *****************************************************************************
+    Copyright (c) Microsoft Corporation. All rights reserved.
+    Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+    this file except in compliance with the License. You may obtain a copy of the
+    License at http://www.apache.org/licenses/LICENSE-2.0
+
+    THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+    WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+    MERCHANTABLITY OR NON-INFRINGEMENT.
+
+    See the Apache Version 2.0 License for specific language governing permissions
+    and limitations under the License.
+    ***************************************************************************** */
+    /* global Reflect, Promise */
+
+    var extendStatics = function(d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
     };
-    var StyletronContext = React.createContext({
-        renderStyle: throwNoEngineAvailableException,
-        renderFontFace: throwNoEngineAvailableException,
-        renderKeyframes: throwNoEngineAvailableException
-    });
 
-    var StyletronConsumer = StyletronContext.Consumer;
+    function __extends(d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    }
 
-    var StyletronProvider = StyletronContext.Provider;
+    var __assign = function() {
+        __assign = Object.assign || function __assign(t) {
+            for (var s, i = 1, n = arguments.length; i < n; i++) {
+                s = arguments[i];
+                for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+            }
+            return t;
+        };
+        return __assign.apply(this, arguments);
+    };
+
+    var genericMessage = "Invariant Violation";
+    var _a = Object.setPrototypeOf, setPrototypeOf = _a === void 0 ? function (obj, proto) {
+        obj.__proto__ = proto;
+        return obj;
+    } : _a;
+    var InvariantError = /** @class */ (function (_super) {
+        __extends(InvariantError, _super);
+        function InvariantError(message) {
+            if (message === void 0) { message = genericMessage; }
+            var _this = _super.call(this, typeof message === "number"
+                ? genericMessage + ": " + message + " (see https://github.com/apollographql/invariant-packages)"
+                : message) || this;
+            _this.framesToPop = 1;
+            _this.name = genericMessage;
+            setPrototypeOf(_this, InvariantError.prototype);
+            return _this;
+        }
+        return InvariantError;
+    }(Error));
+    function invariant(condition, message) {
+        if (!condition) {
+            throw  new InvariantError() ;
+        }
+    }
+    function wrapConsoleMethod(method) {
+        return function () {
+            return console[method].apply(console, arguments);
+        };
+    }
+    (function (invariant) {
+        invariant.warn = wrapConsoleMethod("warn");
+        invariant.error = wrapConsoleMethod("error");
+    })(invariant || (invariant = {}));
+    // Code that uses ts-invariant with rollup-plugin-invariant may want to
+    // import this process stub to avoid errors evaluating "production".
+    // However, because most ESM-to-CJS compilers will rewrite the process import
+    // as tsInvariant.process, which prevents proper replacement by minifiers, we
+    // also attempt to define the stub globally when it is not already defined.
+    var processStub = { env: {} };
+    if (typeof process === "object") {
+        processStub = process;
+    }
+    else
+        try {
+            // Using Function to evaluate this assignment in global scope also escapes
+            // the strict mode of the current module, thereby allowing the assignment.
+            // Inspired by https://github.com/facebook/regenerator/pull/369.
+            Function("stub", "process = stub")(processStub);
+        }
+        catch (atLeastWeTried) {
+            // The assignment can fail if a Content Security Policy heavy-handedly
+            // forbids Function usage. In those environments, developers should take
+            // extra care to replace "production" in their production builds,
+            // or define an appropriate global.process polyfill.
+        }
+
+    var styletronContext;
+    function getStyletronContext() {
+        if (!styletronContext) {
+            styletronContext = React.createContext({});
+        }
+        return styletronContext;
+    }
+
+    function StyletronConsumer(props) {
+        var StyletronContext = getStyletronContext();
+        return React__default.createElement(StyletronContext.Consumer, null, function (context) {
+             invariant(context && context.engine) ;
+            return props.children(context.engine);
+        });
+    }
+
+    function StyletronProvider(props) {
+        var StyletronContext = getStyletronContext();
+        return React__default.createElement(StyletronContext.Consumer, null, function (context) {
+            if (context === void 0) { context = {}; }
+            if (context && context.engine !== props.engine) {
+                context = Object.assign({}, context, { engine: props.engine });
+            }
+             invariant(context.engine) ;
+            return (React__default.createElement(StyletronContext.Provider, { value: context }, props.children));
+        });
+    }
 
     var DEFAULT_STYLETRON_HYDRATE_QUERY_SELECTOR = "_styletron_hydrate_";
     var defaultOptions = {
@@ -73,39 +184,16 @@
     }
 
     function useStyletron() {
-        return React.useContext(StyletronContext);
+        var StyletronContext = (getStyletronContext());
+        var engine = React.useContext(StyletronContext).engine;
+         invariant(engine) ;
+        return engine;
     }
 
     function useStyletronDriver() {
         var styletron = useStyletron();
         return function (styles) { return styletronStandard.driver(styles, styletron); };
     }
-
-    /*! *****************************************************************************
-    Copyright (c) Microsoft Corporation. All rights reserved.
-    Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-    this file except in compliance with the License. You may obtain a copy of the
-    License at http://www.apache.org/licenses/LICENSE-2.0
-
-    THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-    KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-    WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-    MERCHANTABLITY OR NON-INFRINGEMENT.
-
-    See the Apache Version 2.0 License for specific language governing permissions
-    and limitations under the License.
-    ***************************************************************************** */
-
-    var __assign = function() {
-        __assign = Object.assign || function __assign(t) {
-            for (var s, i = 1, n = arguments.length; i < n; i++) {
-                s = arguments[i];
-                for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-            }
-            return t;
-        };
-        return __assign.apply(this, arguments);
-    };
 
     var withStyletron = function (Component) { return function (props) {
         var styletron = useStyletron();
@@ -115,7 +203,6 @@
     exports.DEFAULT_STYLETRON_HYDRATE_QUERY_SELECTOR = DEFAULT_STYLETRON_HYDRATE_QUERY_SELECTOR;
     exports.StyletronAtomicEngineProvider = StyletronAtomicEngineProvider;
     exports.StyletronConsumer = StyletronConsumer;
-    exports.StyletronContext = StyletronContext;
     exports.StyletronProvider = StyletronProvider;
     exports.getAtomicProvider = getAtomicProvider;
     exports.getStyletronClient = getStyletronClient;
