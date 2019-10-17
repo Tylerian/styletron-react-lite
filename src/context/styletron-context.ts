@@ -1,5 +1,4 @@
 import {
-    Context,
     createContext
 } from "react";
 
@@ -7,20 +6,16 @@ import {
     StandardEngine
 } from "styletron-standard";
 
-type StyletronContextValue = {
-    engine?: StandardEngine;
+const throwNoEngineAvailableException = () => {
+    throw new Error(`A Styletron styled component was rendered, but no Styletron engine instance was provided in React context.`);
 }
 
-let styletronContext: Context<StyletronContextValue>;
-
-function getStyletronContext() {
-    if (!styletronContext) {
-        styletronContext = createContext({});
-    }
-
-    return styletronContext;
-}
+const StyletronContext = createContext<StandardEngine>({
+    renderStyle: throwNoEngineAvailableException,
+    renderFontFace: throwNoEngineAvailableException,
+    renderKeyframes: throwNoEngineAvailableException
+});
 
 export {
-    getStyletronContext
+    StyletronContext
 };
