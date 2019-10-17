@@ -41,6 +41,7 @@ const styletron = getStyletron();
 function Root() {
   return (
     <StyletronProvider engine={styletron}>
+      <YourComponentTree />
     </StyletronProvider>
   );
 }
