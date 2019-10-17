@@ -5,6 +5,14 @@ import {
 const provider = getAtomicProvider();
 
 /**
+ * Return a new instance of a styletron client if ran client-side,
+ * or a new instance of a styletron server if ran server-side.
+ */
+function getStyletron() {
+    return provider.get();
+}
+
+/**
  * Return a new instance of a styletron client with preset defaults.
  */
 function getStyletronClient() {
@@ -19,6 +27,7 @@ function getStyletronServer() {
 }
 
 export {
+    getStyletron,
     getStyletronClient,
     getStyletronServer
 };
