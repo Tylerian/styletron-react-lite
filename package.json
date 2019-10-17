@@ -1,6 +1,6 @@
 {
   "name": "styletron-react-lite",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "A lightweight styletron binding for React.",
   "main": "out/styletron-react-lite.cjs.js",
   "module": "out/styletron-react-lite.esm.js",
@@ -10,6 +10,14 @@
     "out",
     "LICENSE",
     "README.md"
+  ],
+  "keywords": [
+    "acss",
+    "atomic-css",
+    "styletron",
+    "styletron-engine-atomic",
+    "styletron-react",
+    "styletron-react-lite"
   ],
   "repository": "https://github.com/Tylerian/styletron-react-lite.git",
   "author": "Jairo Tylera <Tylerian>",
