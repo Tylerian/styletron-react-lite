@@ -1,5 +1,7 @@
 # styletron-react-lite
-[![npm version](https://badge.fury.io/js/styletron-react-lite.svg)](https://badge.fury.io/js/styletron-react-lite)  
+[![npm version](https://badge.fury.io/js/styletron-react-lite.svg)](https://badge.fury.io/js/styletron-react-lite)
+[![bundlephobia](https://img.shields.io/bundlephobia/minzip/styletron-react-lite)](https://bundlephobia.com/result?p=styletron-react-lite)  
+
 Lightweight `Styletron` bindings for `React`.  
 
 `styletron-react-lite` is a thin react wrapper around Uber's `Styletron` library.
