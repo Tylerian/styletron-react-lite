@@ -33,7 +33,7 @@ function StyletronProvider(props: StyletronProviderProps) {
                 invariant(
                     context.engine,
                     "StyletronProvider was not passed an engine instance." +
-                    "Make sure you pass in your client via the \"client\" prop."
+                    "Make sure you pass in your engine via the \"engine\" prop."
                 );
 
                 return (

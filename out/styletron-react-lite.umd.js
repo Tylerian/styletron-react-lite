@@ -1,7 +1,7 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('styletron-engine-atomic'), require('styletron-standard')) :
     typeof define === 'function' && define.amd ? define(['exports', 'react', 'styletron-engine-atomic', 'styletron-standard'], factory) :
-    (global = global || self, factory(global.StyletronReactLite = {}, global.React, global.styletronEngineAtomic, global.styletronStandard));
+    (global = global || self, factory(global.StyletronReactLite = {}, global.React, global.StyletronEngineAtomic, global.StyletronStandard));
 }(this, function (exports, React, styletronEngineAtomic, styletronStandard) { 'use strict';
 
     var React__default = 'default' in React ? React['default'] : React;
@@ -67,7 +67,7 @@
     }(Error));
     function invariant(condition, message) {
         if (!condition) {
-            throw new InvariantError(message);
+            throw  new InvariantError() ;
         }
     }
     function wrapConsoleMethod(method) {
@@ -80,7 +80,7 @@
         invariant.error = wrapConsoleMethod("error");
     })(invariant || (invariant = {}));
     // Code that uses ts-invariant with rollup-plugin-invariant may want to
-    // import this process stub to avoid errors evaluating process.env.NODE_ENV.
+    // import this process stub to avoid errors evaluating "production".
     // However, because most ESM-to-CJS compilers will rewrite the process import
     // as tsInvariant.process, which prevents proper replacement by minifiers, we
     // also attempt to define the stub globally when it is not already defined.
@@ -98,7 +98,7 @@
         catch (atLeastWeTried) {
             // The assignment can fail if a Content Security Policy heavy-handedly
             // forbids Function usage. In those environments, developers should take
-            // extra care to replace process.env.NODE_ENV in their production builds,
+            // extra care to replace "production" in their production builds,
             // or define an appropriate global.process polyfill.
         }
 
@@ -112,24 +112,22 @@
 
     function StyletronConsumer(props) {
         var StyletronContext = getStyletronContext();
-        return (React__default.createElement(StyletronContext.Consumer, null, function (context) {
-            invariant(context && context.engine, "Could not find 'engine' in the context of StyletronConsumer." +
-                "Wrap the root component in an <StyletronProvider>.");
+        return React__default.createElement(StyletronContext.Consumer, null, function (context) {
+             invariant(context && context.engine) ;
             return props.children(context.engine);
-        }));
+        });
     }
 
     function StyletronProvider(props) {
         var StyletronContext = getStyletronContext();
-        return (React__default.createElement(StyletronContext.Consumer, null, function (context) {
+        return React__default.createElement(StyletronContext.Consumer, null, function (context) {
             if (context === void 0) { context = {}; }
             if (context && context.engine !== props.engine) {
                 context = Object.assign({}, context, { engine: props.engine });
             }
-            invariant(context.engine, "StyletronProvider was not passed an engine instance." +
-                "Make sure you pass in your client via the \"client\" prop.");
+             invariant(context.engine) ;
             return (React__default.createElement(StyletronContext.Provider, { value: context }, props.children));
-        }));
+        });
     }
 
     var DEFAULT_STYLETRON_HYDRATE_QUERY_SELECTOR = "_styletron_hydrate_";
@@ -188,8 +186,7 @@
     function useStyletron() {
         var StyletronContext = (getStyletronContext());
         var engine = React.useContext(StyletronContext).engine;
-        invariant(engine, 'No Apollo Client instance can be found. Please ensure that you ' +
-            'have called `ApolloProvider` higher up in your tree.');
+         invariant(engine) ;
         return engine;
     }
 
