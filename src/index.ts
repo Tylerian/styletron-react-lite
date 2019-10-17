@@ -1,8 +1,4 @@
 import {
-    StyletronContext
-} from "./context/styletron-context";
-
-import {
     StyletronConsumer
 } from "./context/styletron-consumer";
 
@@ -38,7 +34,6 @@ import {
 
 export {
     /* context */
-    StyletronContext,
     StyletronConsumer,
     StyletronProvider,
     
