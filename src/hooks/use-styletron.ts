@@ -25,8 +25,8 @@ function useStyletron(): StandardEngine {
 
     invariant(
         engine,
-        'No Apollo Client instance can be found. Please ensure that you ' +
-          'have called `ApolloProvider` higher up in your tree.'
+        "No Styletron instance can be found. Please ensure that you " +
+        "have called \"StyletronProvider\" higher up in your tree."
     );
 
     return engine!;

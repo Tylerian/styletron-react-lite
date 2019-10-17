@@ -2,7 +2,7 @@ import React from "react";
 
 import {
     useStyletron
-} from "./use-styletron";
+} from "../hooks/use-styletron";
 
 const withStyletron = (Component: any) => (props: any) => {
     const styletron = useStyletron();

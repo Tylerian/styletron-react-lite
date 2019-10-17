@@ -22,11 +22,11 @@ import {
 
 import {
     useStyletron
-} from "./utilities/use-styletron";
+} from "./hooks/use-styletron";
 
 import {
     useStyletronDriver
-} from "./utilities/use-styletron-driver";
+} from "./hooks/use-styletron-driver";
 
 import {
     withStyletron
