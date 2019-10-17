@@ -165,6 +165,12 @@
         return StyletronAtomicEngineProvider;
     }());
 
+    /**
+     * Return a new instance of a StyletronEngineProvider
+     * based on StyletronAtomic as its backing engine.
+     *
+     * @param options StyletronAtomicEngine configuration options.
+     */
     function getAtomicProvider(options) {
         return new StyletronAtomicEngineProvider(options);
     }
@@ -195,6 +201,11 @@
         return function (styles) { return styletronStandard.driver(styles, styletron); };
     }
 
+    /**
+     * Passes an styletron instance down the component tree.
+     *
+     * @param Component A react component to pass styletron.
+     */
     var withStyletron = function (Component) { return function (props) {
         var styletron = useStyletron();
         return (React__default.createElement(Component, __assign({}, props, { styletron: styletron })));
