@@ -1,4 +1,7 @@
-/// <reference types="react" />
+import { Context } from "react";
 import { StandardEngine } from "styletron-standard";
-declare const StyletronContext: import("react").Context<StandardEngine>;
-export { StyletronContext };
+declare type StyletronContextValue = {
+    engine?: StandardEngine;
+};
+declare function getStyletronContext(): Context<StyletronContextValue>;
+export { getStyletronContext };
