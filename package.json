@@ -1,6 +1,6 @@
 {
   "name": "styletron-react-lite",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "A lightweight styletron binding for React.",
   "main": "out/styletron-react-lite.cjs.js",
   "module": "out/styletron-react-lite.esm.js",
@@ -24,7 +24,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "build": "rollup -c",
+    "build": "tsc && rollup -c",
     "watch": "rollup -c -w",
     "npmjs": "yarn build && yarn publish"
   },
