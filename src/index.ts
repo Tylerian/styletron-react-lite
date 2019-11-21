@@ -8,6 +8,7 @@ import {
 
 import {
     StyletronAtomicEngineProvider,
+    DEFAULT_STYLETRON_HYDRATE_CLASS_NAME,
     DEFAULT_STYLETRON_HYDRATE_QUERY_SELECTOR
 } from "./providers/styletron-atomic-engine-provider";
 
@@ -49,5 +50,6 @@ export {
     StyletronAtomicEngineProvider,
 
     /* constants */
+    DEFAULT_STYLETRON_HYDRATE_CLASS_NAME,
     DEFAULT_STYLETRON_HYDRATE_QUERY_SELECTOR
 };

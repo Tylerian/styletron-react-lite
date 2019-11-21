@@ -4,6 +4,7 @@ import invariant from "rollup-plugin-invariant";
 import resolver from "rollup-plugin-node-resolve";
 import replace from "rollup-plugin-replace";
 import typescript from "rollup-plugin-typescript";
+import { terser } from "rollup-plugin-terser";
 
 export default {
     external: [
@@ -58,6 +59,8 @@ export default {
         /* replace strings before bundling */
         replace({
             'process.env.NODE_ENV': JSON.stringify('production')
-        })
+        }),
+        /* minify */
+        terser()
     ]
 }

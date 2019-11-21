@@ -11,8 +11,8 @@ import {
 type StyletronAtomicEngineProviderOptions = {
     styleTagQuerySelector: string;
 }
-
-const DEFAULT_STYLETRON_HYDRATE_QUERY_SELECTOR = "_styletron_hydrate_";
+const DEFAULT_STYLETRON_HYDRATE_CLASS_NAME = "_styletron_hydrate_";
+const DEFAULT_STYLETRON_HYDRATE_QUERY_SELECTOR = `.${DEFAULT_STYLETRON_HYDRATE_CLASS_NAME}`;
 
 const defaultOptions: StyletronAtomicEngineProviderOptions = {
     styleTagQuerySelector: DEFAULT_STYLETRON_HYDRATE_QUERY_SELECTOR
@@ -53,5 +53,6 @@ class StyletronAtomicEngineProvider implements IStyletronEngineProvider {
 export {
     StyletronAtomicEngineProvider,
     StyletronAtomicEngineProviderOptions,
+    DEFAULT_STYLETRON_HYDRATE_CLASS_NAME,
     DEFAULT_STYLETRON_HYDRATE_QUERY_SELECTOR
 };
